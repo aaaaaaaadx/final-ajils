@@ -882,19 +882,6 @@ function CompliancePage() {
 }
 
 function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    alert("Thank you for your inquiry! We'll be in touch within 24 hours.");
-  };
-
   return (
     <section className="max-w-7xl mx-auto px-8 py-32">
       <motion.div
@@ -913,98 +900,11 @@ function ContactPage() {
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-16">
-        {/* Contact Form */}
+      <div className="max-w-2xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          <Card>
-            <CardContent>
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-colors text-base"
-                    placeholder="John Smith"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-colors text-base"
-                    placeholder="john@example.com"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-colors text-base"
-                    placeholder="+44 XXXX XXXXXX"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-colors text-base"
-                    placeholder="Your Business"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Message *
-                  </label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-6 py-4 rounded-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-colors resize-none text-base"
-                    rows={6}
-                    placeholder="Tell us about your requirements..."
-                    required
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="w-full text-lg"
-                >
-                  Send Message
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
           className="space-y-8"
         >
           <Card>
@@ -1026,20 +926,6 @@ function ContactPage() {
                     </div>
                   </div>
                 ))}
-                
-                <div className="pt-6 border-t-2 border-gray-100">
-                  <div className="flex gap-6 items-start">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <Clock className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2 text-gray-900">Business Hours</h3>
-                      <p className="text-gray-600 text-base">Monday - Friday: 8:00 AM - 6:00 PM</p>
-                      <p className="text-gray-600 text-base">Saturday: 9:00 AM - 1:00 PM</p>
-                      <p className="text-gray-600 text-base">Sunday: Closed</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>
