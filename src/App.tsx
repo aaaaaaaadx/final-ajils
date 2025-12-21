@@ -53,7 +53,7 @@ function Button({
   type?: "button" | "submit";
 }) {
   const baseClasses =
-    "px-10 py-5 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl inline-flex items-center justify-center gap-3";
+    "px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl inline-flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base";
   const variantClasses = {
     primary:
       "bg-gradient-to-r from-green-600 via-green-500 to-emerald-600 text-white hover:from-green-700 hover:via-green-600 hover:to-emerald-700 shadow-green-200",
@@ -90,6 +90,7 @@ function Navbar({
   navigate: (r: Route) => void;
   currentRoute: Route;
 }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navItems: { route: Route; label: string }[] = [
     { route: "home", label: "Home" },
     { route: "services", label: "Used Oil Collection" },
@@ -98,26 +99,33 @@ function Navbar({
     { route: "contact", label: "Contact" },
   ];
 
+  const handleNavigation = (route: Route) => {
+    navigate(route);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className="bg-white/98 backdrop-blur-xl border-b border-green-100 sticky top-0 z-50 shadow-lg shadow-green-50"
     >
-      <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center">
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="cursor-pointer flex items-center gap-3"
-          onClick={() => navigate("home")}
+          className="cursor-pointer flex items-center gap-2 sm:gap-3"
+          onClick={() => handleNavigation("home")}
         >
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
-            <Droplet className="w-7 h-7 text-white" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
+            <Droplet className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
           </div>
-          <span className="text-3xl font-black bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 bg-clip-text text-transparent">
+          <span className="text-xl sm:text-3xl font-black bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 bg-clip-text text-transparent">
             Ajil's Oils
           </span>
         </motion.div>
-        <div className="flex gap-10 text-sm font-bold">
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex gap-10 text-sm font-bold">
           {navItems.map((item) => (
             <motion.button
               key={item.route}
@@ -141,21 +149,63 @@ function Navbar({
             </motion.button>
           ))}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden p-2 text-gray-600 hover:text-green-600"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {mobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden border-t border-green-100 bg-white"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.route}
+                  onClick={() => handleNavigation(item.route)}
+                  className={`block w-full text-left px-4 py-3 rounded-xl font-bold transition-colors ${
+                    currentRoute === item.route
+                      ? "bg-green-50 text-green-700"
+                      : "text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
 
 function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white mt-32 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white mt-16 sm:mt-32 overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 right-20 w-96 h-96 bg-green-300 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-80 h-80 bg-emerald-400 rounded-full blur-3xl" />
       </div>
-      
-      <div className="max-w-7xl mx-auto px-8 py-20 grid md:grid-cols-4 gap-16 relative z-10">
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -236,7 +286,7 @@ function Footer() {
       </div>
       
       <div className="border-t border-green-700/50 relative z-10">
-        <div className="max-w-7xl mx-auto px-8 py-8 flex justify-between items-center text-sm text-green-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs sm:text-sm text-green-200 text-center sm:text-left">
           <p>© 2024 Ajil's Oils. All rights reserved.</p>
           <p>Building a sustainable future, one drop at a time.</p>
         </div>
@@ -291,44 +341,44 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
           <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent_50%)]" />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-8 py-40">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-40">
           <div className="max-w-4xl">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full mb-8 border border-white/30">
-                <Clock className="w-5 h-5 text-white" />
-                <span className="text-white font-bold text-sm">Delivery Within 1-2 Days When You Need It</span>
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/20 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 sm:mb-8 border border-white/30">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                <span className="text-white font-bold text-xs sm:text-sm">Delivery Within 1-2 Days When You Need It</span>
               </div>
             </motion.div>
-            
+
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-7xl font-black text-white leading-snug mb-8"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-snug mb-6 sm:mb-8"
             >
               Professional Cooking Oil
               <span className="block text-green-100">Management Services</span>
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-2xl text-white/95 leading-relaxed mb-12 max-w-3xl"
+              className="text-base sm:text-xl md:text-2xl text-white/95 leading-relaxed mb-8 sm:mb-12 max-w-3xl"
             >
               Complete used cooking oil collection and premium fresh oil supply. We deliver within 1-2 days when you're in a pinch.
               Flexible service for restaurants, takeaways, and food manufacturers. Sustainable. Compliant. Reliable.
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-wrap gap-6"
+              className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6"
             >
               <Button onClick={() => navigate("contact")} variant="white">
                 <Phone className="w-5 h-5" />
@@ -345,7 +395,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="mt-20 grid grid-cols-3 gap-12 pt-12 border-t border-white/30"
+              className="mt-12 sm:mt-20 grid grid-cols-3 gap-4 sm:gap-8 md:gap-12 pt-8 sm:pt-12 border-t border-white/30"
             >
               {[
                 { value: "500+", label: "Businesses Served", icon: Users },
@@ -353,9 +403,9 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
                 { value: "15+", label: "Years Experience", icon: Award },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
-                  <stat.icon className="w-8 h-8 text-white/80 mx-auto mb-3" />
-                  <div className="text-5xl font-black text-white mb-2">{stat.value}</div>
-                  <div className="text-green-100 font-semibold">{stat.label}</div>
+                  <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white/80 mx-auto mb-2 sm:mb-3" />
+                  <div className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-1 sm:mb-2">{stat.value}</div>
+                  <div className="text-xs sm:text-sm md:text-base text-green-100 font-semibold">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -364,7 +414,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
       </section>
 
       {/* Why Choose Us */}
-      <section className="max-w-7xl mx-auto px-8 py-32">
+      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -373,16 +423,16 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
           className="text-center mb-20"
         >
           <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Why Ajil's Oils</span>
-          <h2 className="text-5xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
             The Complete Oil Management Solution
           </h2>
-          <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             We combine reliability, sustainability, and compliance to deliver exceptional service 
             that keeps your kitchen running smoothly.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
           {[
             {
               icon: ShieldCheck,
@@ -443,8 +493,8 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
       </section>
 
       {/* How It Works */}
-      <section className="bg-gradient-to-br from-green-50 to-emerald-50 py-32">
-        <div className="max-w-7xl mx-auto px-8">
+      <section className="bg-gradient-to-br from-green-50 to-emerald-50 py-16 sm:py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -459,7 +509,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 relative">
             {/* Connection Lines */}
             <div className="hidden md:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-green-200 via-green-300 to-green-200 z-0" />
             
@@ -494,7 +544,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
       </section>
 
       {/* Industries */}
-      <section className="max-w-7xl mx-auto px-8 py-32">
+      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -509,7 +559,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
           {[
             { icon: Factory, title: "Restaurants", desc: "Fine dining to casual eateries", gradient: "from-green-500 to-emerald-500" },
             { icon: TrendingUp, title: "Takeaways", desc: "Fast food and quick service", gradient: "from-emerald-500 to-green-600" },
@@ -541,28 +591,28 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
         <div className="absolute inset-0 bg-gradient-to-br from-green-600 via-green-500 to-emerald-600" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_70%)]" />
         
-        <div className="relative max-w-5xl mx-auto px-8 py-32 text-center">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full mb-8 border border-white/30">
-              <Heart className="w-5 h-5 text-white" />
-              <span className="text-white font-bold text-sm">Join Hundreds of Satisfied Clients</span>
+            <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/20 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 sm:mb-8 border border-white/30">
+              <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <span className="text-white font-bold text-xs sm:text-sm">Join Hundreds of Satisfied Clients</span>
             </div>
-            
-            <h2 className="text-6xl font-black text-white mb-6">
+
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-2xl text-white/90 mb-12 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl md:text-2xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto">
               Request a free quote today and discover how we can simplify your cooking oil management.
             </p>
-            <Button onClick={() => navigate("contact")} variant="white" className="text-xl">
-              <Phone className="w-6 h-6" />
+            <Button onClick={() => navigate("contact")} variant="white" className="text-base sm:text-lg md:text-xl">
+              <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
               Contact Us Today
-              <ArrowRight className="w-6 h-6" />
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </Button>
           </motion.div>
         </div>
@@ -573,7 +623,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
 
 function ServicesPage() {
   return (
-    <section className="max-w-7xl mx-auto px-8 py-32">
+    <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -581,10 +631,10 @@ function ServicesPage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Our Services</span>
-        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Used Cooking Oil Collection
         </h1>
-        <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
           Professional, compliant, and sustainable used cooking oil collection services designed 
           to keep your business running smoothly while supporting environmental responsibility.
         </p>
@@ -666,7 +716,7 @@ function ServicesPage() {
 
 function FreshOilPage() {
   return (
-    <section className="max-w-7xl mx-auto px-8 py-32">
+    <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -674,10 +724,10 @@ function FreshOilPage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Fresh Oil Supply</span>
-        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Premium Fresh Cooking Oil
         </h1>
-        <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
           High-quality food-grade cooking oils delivered on schedule, or within 1-2 days when you're running low.
           Flexible service that keeps your kitchen running—combine with our collection service for a complete solution.
         </p>
@@ -821,7 +871,7 @@ function FreshOilPage() {
 
 function CompliancePage() {
   return (
-    <section className="max-w-7xl mx-auto px-8 py-32">
+    <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -829,16 +879,16 @@ function CompliancePage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Compliance & Safety</span>
-        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Full Regulatory Compliance
         </h1>
-        <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
           We operate in complete accordance with UK waste management legislation, 
           providing comprehensive documentation and full traceability for every collection.
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-10 mb-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 mb-12 sm:mb-16 md:mb-20">
         {[
           {
             icon: ShieldCheck,
@@ -932,7 +982,7 @@ function CompliancePage() {
 
 function ContactPage() {
   return (
-    <section className="max-w-7xl mx-auto px-8 py-32">
+    <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -940,7 +990,7 @@ function ContactPage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Get In Touch</span>
-        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Contact Ajil's Oils
         </h1>
         <p className="mt-8 text-xl text-gray-600 max-w-3xl mx-auto">
