@@ -729,18 +729,27 @@ function FreshOilPage() {
         className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-16 border-2 border-green-100"
       >
         <h2 className="text-4xl font-black mb-12 text-center text-gray-900">Product Range</h2>
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <p className="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+          We supply premium cooking oils from trusted major brands, ensuring consistent quality and performance for your commercial kitchen.
+        </p>
+        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[
             {
               name: "Vegetable Oil",
               desc: "Versatile all-purpose oil perfect for frying, cooking, and baking. Ideal for diverse menu requirements.",
-              features: ["High quality", "Food-grade certified", "20L containers"],
+              brands: ["KTC Vegetable Oil"],
+              icon: Droplet,
+            },
+            {
+              name: "Corn Oil",
+              desc: "High-quality corn oil with excellent frying properties and neutral flavor profile.",
+              brands: ["KTC Corn Oil"],
               icon: Droplet,
             },
             {
               name: "Rapeseed Oil",
               desc: "Premium oil with high smoke point, specifically designed for deep frying and high-heat cooking.",
-              features: ["High smoke point", "Long-lasting", "Bulk delivery available"],
+              brands: ["KTC Rapeseed Oil", "Pride Rapeseed Oil"],
               icon: Leaf,
             },
           ].map((product, i) => (
@@ -750,20 +759,56 @@ function FreshOilPage() {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
                     <product.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold text-green-700">{product.name}</h3>
+                  <h3 className="text-2xl font-bold text-green-700">{product.name}</h3>
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed text-base">{product.desc}</p>
-                <ul className="space-y-3">
-                  {product.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-gray-700 font-medium">
-                      <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                <div className="mb-4">
+                  <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Brands Available:</h4>
+                  <ul className="space-y-2">
+                    {product.brands.map((brand, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-gray-700 font-medium">
+                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                        {brand}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Specialty Products */}
+        <div className="mt-16 max-w-4xl mx-auto">
+          <h3 className="text-3xl font-black mb-8 text-center text-gray-900">Specialty Frying Oils</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "P100",
+                desc: "High-performance frying oil for commercial kitchens",
+              },
+              {
+                name: "Palmax",
+                desc: "Premium palm oil blend for consistent frying results",
+              },
+              {
+                name: "Frymax",
+                desc: "Specialized frying oil for extended use and durability",
+              },
+            ].map((specialty, i) => (
+              <Card key={i} className="bg-white">
+                <CardContent>
+                  <div className="text-center">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <Award className="w-7 h-7 text-white" />
+                    </div>
+                    <h4 className="text-xl font-bold text-green-700 mb-3">{specialty.name}</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed">{specialty.desc}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </motion.div>
     </section>
