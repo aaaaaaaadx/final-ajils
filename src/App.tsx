@@ -308,7 +308,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-7xl font-black text-white leading-tight mb-8"
+              className="text-7xl font-black text-white leading-snug mb-8"
             >
               Professional Cooking Oil
               <span className="block text-green-100">Management Services</span>
@@ -373,7 +373,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
           className="text-center mb-20"
         >
           <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Why Ajil's Oils</span>
-          <h2 className="text-5xl font-black mt-4 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
             The Complete Oil Management Solution
           </h2>
           <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
@@ -581,7 +581,7 @@ function ServicesPage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Our Services</span>
-        <h1 className="text-6xl font-black mt-4 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Used Cooking Oil Collection
         </h1>
         <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -674,7 +674,7 @@ function FreshOilPage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Fresh Oil Supply</span>
-        <h1 className="text-6xl font-black mt-4 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Premium Fresh Cooking Oil
         </h1>
         <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -829,7 +829,7 @@ function CompliancePage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Compliance & Safety</span>
-        <h1 className="text-6xl font-black mt-4 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Full Regulatory Compliance
         </h1>
         <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
@@ -940,7 +940,7 @@ function ContactPage() {
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Get In Touch</span>
-        <h1 className="text-6xl font-black mt-4 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
+        <h1 className="text-6xl font-black mt-4 pb-2 bg-gradient-to-r from-gray-900 via-green-800 to-emerald-800 bg-clip-text text-transparent">
           Contact Ajil's Oils
         </h1>
         <p className="mt-8 text-xl text-gray-600 max-w-3xl mx-auto">
