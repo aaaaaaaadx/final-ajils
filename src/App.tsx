@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Truck,
@@ -254,6 +254,10 @@ function PageWrapper({
   navigate: (r: Route) => void;
   currentRoute: Route;
 }) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentRoute]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50/30 via-white to-emerald-50/30 text-gray-900 flex flex-col">
       <Navbar navigate={navigate} currentRoute={currentRoute} />
