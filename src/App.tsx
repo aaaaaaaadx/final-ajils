@@ -26,9 +26,9 @@ import {
 function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.div
-      whileHover={{ y: -12, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className={`rounded-3xl shadow-2xl border border-green-100/50 bg-white hover:shadow-green-100 transition-all duration-500 overflow-hidden group ${className}`}
+      whileHover={{ y: -8, scale: 1.01 }}
+      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      className={`rounded-3xl shadow-2xl border border-green-100/50 bg-white hover:shadow-green-100 transition-all duration-200 overflow-hidden group ${className}`}
     >
       {children}
     </motion.div>
@@ -53,7 +53,7 @@ function Button({
   type?: "button" | "submit";
 }) {
   const baseClasses =
-    "px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl inline-flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base";
+    "px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold transition-all duration-150 transform hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl inline-flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base";
   const variantClasses = {
     primary:
       "bg-gradient-to-r from-green-600 via-green-500 to-emerald-600 text-white hover:from-green-700 hover:via-green-600 hover:to-emerald-700 shadow-green-200",
@@ -212,7 +212,7 @@ function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.3 }}
         >
           <div className="flex items-center gap-3 mb-6">
             <img
@@ -231,7 +231,7 @@ function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
         >
           <h4 className="text-white font-bold mb-6 text-lg">Services</h4>
           <ul className="space-y-4 text-sm text-green-100">
@@ -254,7 +254,7 @@ function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
         >
           <h4 className="text-white font-bold mb-6 text-lg">Industries</h4>
           <ul className="space-y-4 text-sm text-green-100">
@@ -269,7 +269,7 @@ function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
         >
           <h4 className="text-white font-bold mb-6 text-lg">Get in Touch</h4>
           <div className="space-y-4 text-sm text-green-100">
@@ -321,7 +321,7 @@ function PageWrapper({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.25 }}
           className="flex-grow"
         >
           {children}
@@ -350,7 +350,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.35 }}
             >
               <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/20 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 sm:mb-8 border border-white/30">
                 <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -361,7 +361,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.35, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-snug mb-6 sm:mb-8"
             >
               Professional Cooking Oil
@@ -371,7 +371,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.35, delay: 0.15 }}
               className="text-base sm:text-xl md:text-2xl text-white/95 leading-relaxed mb-8 sm:mb-12 max-w-3xl"
             >
               Complete used cooking oil collection and premium fresh oil supply. We deliver within 1-2 days when you're in a pinch.
@@ -381,7 +381,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.35, delay: 0.2 }}
               className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6"
             >
               <Button onClick={() => navigate("contact")} variant="white">
@@ -398,7 +398,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.35, delay: 0.25 }}
               className="mt-12 sm:mt-20 grid grid-cols-3 gap-4 sm:gap-8 md:gap-12 pt-8 sm:pt-12 border-t border-white/30"
             >
               {[
@@ -423,7 +423,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.3 }}
           className="text-center mb-20"
         >
           <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Why Ajil's Oils</span>
@@ -480,11 +480,11 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              transition={{ duration: 0.25, delay: i * 0.05 }}
             >
               <Card>
                 <CardContent>
-                  <div className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-20 h-20 rounded-3xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 transition-transform duration-150`}>
                     <feature.icon className="w-10 h-10 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-gray-900">{feature.title}</h3>
@@ -503,7 +503,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.3 }}
             className="text-center mb-20"
           >
             <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Simple Process</span>
@@ -528,7 +528,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
+                transition={{ duration: 0.25, delay: i * 0.05 }}
                 className="relative z-10"
               >
                 <Card>
@@ -553,7 +553,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.3 }}
           className="text-center mb-20"
         >
           <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Our Clients</span>
@@ -574,7 +574,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              transition={{ duration: 0.25, delay: i * 0.05 }}
             >
               <Card>
                 <CardContent>
@@ -600,7 +600,7 @@ function HomePage({ navigate }: { navigate: (r: Route) => void }) {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.3 }}
           >
             <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/20 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 sm:mb-8 border border-white/30">
               <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -631,7 +631,7 @@ function ServicesPage() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Our Services</span>
@@ -673,7 +673,7 @@ function ServicesPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
+            transition={{ duration: 0.25, delay: i * 0.05 }}
           >
             <Card>
               <CardContent>
@@ -701,7 +701,7 @@ function ServicesPage() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-16 border-2 border-green-100"
       >
         <div className="max-w-4xl mx-auto text-center">
@@ -773,7 +773,7 @@ function FreshOilPage() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Fresh Oil Supply</span>
@@ -812,7 +812,7 @@ function FreshOilPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
+            transition={{ duration: 0.25, delay: i * 0.05 }}
           >
             <Card>
               <CardContent>
@@ -832,7 +832,7 @@ function FreshOilPage() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 sm:p-16 border-2 border-green-100"
       >
         <h2 className="text-4xl font-black mb-12 text-center text-gray-900">Product Range</h2>
@@ -847,7 +847,7 @@ function FreshOilPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              transition={{ duration: 0.25, delay: i * 0.05 }}
             >
               <Card className="bg-white overflow-hidden">
                 <CardContent>
@@ -884,7 +884,7 @@ function FreshOilPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.25, delay: i * 0.05 }}
               >
                 <Card className="bg-white h-full">
                   <CardContent>
@@ -919,7 +919,7 @@ function CompliancePage() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Compliance & Safety</span>
@@ -960,7 +960,7 @@ function CompliancePage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
+            transition={{ duration: 0.25, delay: i * 0.05 }}
           >
             <Card>
               <CardContent>
@@ -980,7 +980,7 @@ function CompliancePage() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-16 border-2 border-green-100"
       >
         <h2 className="text-4xl font-black mb-12 text-center text-gray-900">What We Provide</h2>
@@ -1008,7 +1008,7 @@ function CompliancePage() {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.2, delay: i * 0.03 }}
               className="flex gap-6 items-start bg-white rounded-2xl p-8 shadow-lg"
             >
               <CheckCircle className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
@@ -1059,7 +1059,7 @@ function ContactPage() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
         className="text-center mb-20"
       >
         <span className="text-green-600 font-bold text-sm uppercase tracking-wide">Get In Touch</span>
@@ -1078,7 +1078,7 @@ function ContactPage() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
             <Card>
               <CardContent>
@@ -1228,7 +1228,7 @@ function ContactPage() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="space-y-8"
           >
             <Card>
