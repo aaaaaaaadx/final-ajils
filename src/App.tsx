@@ -116,9 +116,11 @@ function Navbar({
           className="cursor-pointer flex items-center gap-2 sm:gap-3"
           onClick={() => handleNavigation("home")}
         >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
-            <Droplet className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
-          </div>
+          <img
+            src="/images/logo.jpeg"
+            alt="Ajil's Oils Logo"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl object-contain shadow-lg"
+          />
           <span className="text-xl sm:text-3xl font-black bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 bg-clip-text text-transparent">
             Ajil's Oils
           </span>
@@ -213,9 +215,11 @@ function Footer() {
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-              <Droplet className="w-6 h-6 text-green-300" />
-            </div>
+            <img
+              src="/images/logo.jpeg"
+              alt="Ajil's Oils Logo"
+              className="w-10 h-10 rounded-xl object-contain bg-white/10 backdrop-blur-sm"
+            />
             <h3 className="text-2xl font-black text-white">Ajil's Oils</h3>
           </div>
           <p className="text-sm leading-relaxed text-green-100">
@@ -715,6 +719,55 @@ function ServicesPage() {
 }
 
 function FreshOilPage() {
+  const products = [
+    {
+      name: "Vegetable Oil",
+      desc: "Versatile all-purpose oil perfect for frying, cooking, and baking. Ideal for diverse menu requirements.",
+      images: [
+        { src: "/images/ktc-vegetable-tin.jpeg", alt: "KTC Vegetable Cooking Oil Tin" },
+        { src: "/images/ktc-vegetable-label.jpeg", alt: "KTC Vegetable Cooking Oil" },
+      ],
+    },
+    {
+      name: "Corn Oil",
+      desc: "High-quality corn oil with excellent frying properties and neutral flavor profile.",
+      images: [
+        { src: "/images/ktc-corn-oil.jpeg", alt: "KTC Pure Corn Oil 15L" },
+      ],
+    },
+    {
+      name: "Rapeseed Oil",
+      desc: "Premium oil with high smoke point, specifically designed for deep frying and high-heat cooking.",
+      images: [
+        { src: "/images/ktc-rapeseed.jpeg", alt: "KTC Extended Life Rapeseed Oil 20L" },
+        { src: "/images/rapeseed-cooking-oil.jpeg", alt: "Consumers Pride Rapeseed Cooking Oil 20L" },
+      ],
+    },
+  ];
+
+  const specialtyProducts = [
+    {
+      name: "P100",
+      desc: "High-performance vegetable frying fat for commercial kitchens",
+      image: "/images/p100.jpeg",
+    },
+    {
+      name: "Palmax SG",
+      desc: "Sustainable RSPO certified palm oil for frying and baking",
+      image: "/images/palmax-sg.jpeg",
+    },
+    {
+      name: "Palmax",
+      desc: "All vegetable frying fat, pure palm oil for consistent results",
+      image: "/images/palmax-blue.jpeg",
+    },
+    {
+      name: "Frymax",
+      desc: "UK's No.1 frying oil - no allergens, no additives, non-GM",
+      image: "/images/frymax.png",
+    },
+  ];
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-32">
       <motion.div
@@ -780,87 +833,78 @@ function FreshOilPage() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
-        className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-16 border-2 border-green-100"
+        className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 sm:p-16 border-2 border-green-100"
       >
         <h2 className="text-4xl font-black mb-12 text-center text-gray-900">Product Range</h2>
         <p className="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
           We supply premium cooking oils from trusted major brands, ensuring consistent quality and performance for your commercial kitchen.
         </p>
-        <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          {[
-            {
-              name: "Vegetable Oil",
-              desc: "Versatile all-purpose oil perfect for frying, cooking, and baking. Ideal for diverse menu requirements.",
-              brands: ["KTC Vegetable Oil"],
-              icon: Droplet,
-            },
-            {
-              name: "Corn Oil",
-              desc: "High-quality corn oil with excellent frying properties and neutral flavor profile.",
-              brands: ["KTC Corn Oil"],
-              icon: Droplet,
-            },
-            {
-              name: "Rapeseed Oil",
-              desc: "Premium oil with high smoke point, specifically designed for deep frying and high-heat cooking.",
-              brands: ["KTC Rapeseed Oil", "Pride Rapeseed Oil"],
-              icon: Leaf,
-            },
-          ].map((product, i) => (
-            <Card key={i} className="bg-white">
-              <CardContent>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
-                    <product.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-green-700">{product.name}</h3>
-                </div>
-                <p className="text-gray-700 mb-6 leading-relaxed text-base">{product.desc}</p>
-                <div className="mb-4">
-                  <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide">Brands Available:</h4>
-                  <ul className="space-y-2">
-                    {product.brands.map((brand, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-gray-700 font-medium">
-                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                        {brand}
-                      </li>
+
+        <div className="space-y-16 max-w-6xl mx-auto">
+          {products.map((product, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+            >
+              <Card className="bg-white overflow-hidden">
+                <CardContent>
+                  <h3 className="text-3xl font-bold text-green-700 mb-4">{product.name}</h3>
+                  <p className="text-gray-700 mb-8 leading-relaxed text-lg">{product.desc}</p>
+                  <div className="flex flex-wrap gap-6 justify-center items-end">
+                    {product.images.map((img, idx) => (
+                      <motion.div
+                        key={idx}
+                        whileHover={{ scale: 1.05 }}
+                        className="bg-white rounded-2xl p-4 shadow-lg"
+                      >
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className="h-48 sm:h-56 w-auto object-contain"
+                        />
+                      </motion.div>
                     ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
         {/* Specialty Products */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <h3 className="text-3xl font-black mb-8 text-center text-gray-900">Specialty Frying Oils</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "P100",
-                desc: "High-performance frying oil for commercial kitchens",
-              },
-              {
-                name: "Palmax",
-                desc: "Premium palm oil blend for consistent frying results",
-              },
-              {
-                name: "Frymax",
-                desc: "Specialized frying oil for extended use and durability",
-              },
-            ].map((specialty, i) => (
-              <Card key={i} className="bg-white">
-                <CardContent>
-                  <div className="text-center">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <Award className="w-7 h-7 text-white" />
+        <div className="mt-20 max-w-6xl mx-auto">
+          <h3 className="text-3xl font-black mb-12 text-center text-gray-900">Specialty Frying Oils</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {specialtyProducts.map((specialty, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <Card className="bg-white h-full">
+                  <CardContent>
+                    <div className="text-center">
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        className="bg-gray-50 rounded-2xl p-4 mb-6 inline-block"
+                      >
+                        <img
+                          src={specialty.image}
+                          alt={specialty.name}
+                          className="h-36 w-auto object-contain mx-auto"
+                        />
+                      </motion.div>
+                      <h4 className="text-xl font-bold text-green-700 mb-3">{specialty.name}</h4>
+                      <p className="text-gray-600 text-sm leading-relaxed">{specialty.desc}</p>
                     </div>
-                    <h4 className="text-xl font-bold text-green-700 mb-3">{specialty.name}</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">{specialty.desc}</p>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
